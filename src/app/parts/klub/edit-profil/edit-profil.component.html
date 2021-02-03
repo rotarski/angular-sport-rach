@@ -1,1 +1,253 @@
-<p>edit-profil works!</p>
+<div class="edit-profile m-3 p-3" *ngIf="stateKlub">
+  <h3 class="text-primary text-center">Dane klubu</h3>
+  <form class="form-horizontal" [formGroup]="formKlub" (ngSubmit)="onSubmit()">
+
+    <input type="number" formControlName="id" hidden>
+
+    <div class="row offset-sm-1 col-sm-10">
+      <div class="form-group col-sm-6">
+        <label class="control-label" for="nazwa">Nazwa</label>
+        <div class="">
+          <input type="text" class="form-control" formControlName="nazwa" id="nazwa">
+        </div>
+      </div>
+    </div>
+
+
+    <div class="row offset-sm-1 col-sm-10">
+      <div class="form-group col-sm-6">
+        <label class="control-label " for="nip">NIP:</label>
+        <div class="">
+          <input type="number" class="form-control" formControlName="nip" id="nip">
+        </div>
+      </div>
+      <div class="form-group  col-sm-6">
+        <label class="control-label" for="regon">Regon:</label>
+        <div class="">
+          <input type="number" class="form-control" formControlName="regon" id="regon">
+        </div>
+      </div>
+    </div>
+
+    <hr>
+    <p class="offset-sm-1 col-sm-10">Adres klubu</p>
+
+    <div formGroupName="adres">
+
+      <div class="row offset-sm-1 col-sm-10">
+  
+        <div class="form-group  col-sm-6">
+          <label class="control-label" for="miejscowosc">Miejscowość:</label>
+          <div class="">
+            <input type="text" class="form-control" formControlName="miejscowosc" id="miejscowosc">
+          </div>
+        </div>
+        <div class="form-group  col-sm-6">
+          <label class="control-label" for="ulica">Ulica:</label>
+          <div class="">
+            <input type="text" class="form-control" formControlName="ulica" id="ulica">
+          </div>
+        </div>
+      </div>
+
+      <div class="row offset-sm-1 col-sm-10">
+        <div class="form-group col-sm-6">
+          <label class="control-label" for="numer">Numer:</label>
+          <div class="">
+            <input type="text" class="form-control" formControlName="numer" id="numer">
+          </div>
+        </div>
+        <div class="form-group  col-sm-6">
+          <label class="control-label" for="kod">Kod:</label>
+          <div class="">
+            <input type="number" class="form-control" id="kod" formControlName="kod">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div formGroupName="rejestracja">
+      <hr>
+      <!--  REJESTRACJA -->
+      <p class="offset-sm-1 col-sm-10"><b>Instytucja Rejestracji</b></p>
+
+      <input type="number" formControlName="id" hidden>
+
+      <div class="row offset-sm-1 col-sm-10">
+        <div class="form-group col-sm-6">
+          <label class="control-label" for="nazwaR">Nazwa</label>
+          <div class="">
+            <input type="text" class="form-control" formControlName="nazwa" id="nazwaR">
+          </div>
+        </div>
+      </div>
+
+      <div class="row offset-sm-1 col-sm-10">
+        <div class="form-group col-sm-6">
+          <label class="control-label" for="numerR">Numer Identyfikacyjny</label>
+          <div class="">
+            <input type="text" class="form-control" formControlName="numerIdentyfikacyjny" id="numerR">
+          </div>
+        </div>
+      </div>
+
+
+      <p class="offset-sm-1 col-sm-10">Adres</p>
+  
+      <div formGroupName="adres">
+  
+        <div class="row offset-sm-1 col-sm-10">
+    
+          <div class="form-group  col-sm-6">
+            <label class="control-label" for="miejscowoscR">Miejscowość:</label>
+            <div class="">
+              <input type="text" class="form-control" formControlName="miejscowosc" id="miejscowoscR">
+            </div>
+          </div>
+          <div class="form-group  col-sm-6">
+            <label class="control-label" for="ulicaR">Ulica:</label>
+            <div class="">
+              <input type="text" class="form-control" formControlName="ulica" id="ulicaR">
+            </div>
+          </div>
+        </div>
+  
+        <div class="row offset-sm-1 col-sm-10">
+          <div class="form-group col-sm-6">
+            <label class="control-label" for="numerR">Numer:</label>
+            <div class="">
+              <input type="text" class="form-control" formControlName="numer" id="numerR">
+            </div>
+          </div>
+          <div class="form-group  col-sm-6">
+            <label class="control-label" for="kodR">Kod:</label>
+            <div class="">
+              <input type="number" class="form-control" id="kodR" formControlName="kod">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr>
+    <p class="offset-sm-1 col-sm-10"><b>Organ Nadzoru</b> </p>
+    <div formGroupName="nadzor">
+      <input type="number" formControlName="id" hidden>
+
+      <div class="offset-sm-1 col-sm-10">
+        <div class="form-group col-sm-6">
+          <label class="control-label" for="nazwaNadzor">Nazwa</label>
+          <div class="">
+            <input type="text" class="form-control" formControlName="nazwa" id="nazwaNadzor">
+          </div>
+        </div>
+      </div>
+      <p class="offset-sm-1 col-sm-10">Skład</p>
+      <div formArrayName="sklad" *ngFor="let czlonek of nadzorSklad; index as i">
+          <div [formGroupName]="i">
+            <input type="number" formControlName="id" hidden >
+
+            <div class="row offset-sm-1 col-sm-10">
+              <div class="form-group col-lg-3">
+                <label class="control-label" for="zimie{i}">Imię</label>
+                <div class="">
+                  <input type="text" class="form-control" formControlName="imie" id="zimie{i}">
+                </div>
+              </div>
+              <div class="form-group col-lg-3">
+                <label class="control-label" for="znazwisko{i}">Nazwisko</label>
+                <div class="">
+                  <input type="text" class="form-control" formControlName="nazwisko" id="znazwisko{i}">
+                </div>
+              </div>
+              <div class="form-group col-lg-3">
+                <label class="control-label" for="zPesel{i}">Pesel</label>
+                <div class="">
+                  <input type="text" class="form-control" formControlName="pesel" id="zPesel{i}">
+                </div>
+              </div>
+              <div class="form-group col-lg-2">
+                <label class="control-label" for="zfunkcjaOrganu{i}">Funkcja</label>
+                <div class="">
+                  <input type="text" class="form-control" formControlName="funkcjaOrganu" id="zfunkcjaOrganu{i}">
+                </div>
+              </div>
+              <div class="col-lg-1 form-group pt-3">
+                <button  class="btn btn-danger mt-3" (click)="deleteCzlonek(2)">Usuń</button>
+              </div>
+            </div>
+          </div>
+      </div>
+      <div class="form-group offset-sm-1 col-sm-10">
+        <button  class="btn btn-success" (click)="addCzlonekNadzoru()">Dodaj nowego członka</button>
+      </div>
+
+
+    </div>
+
+    <p class="offset-sm-1 col-sm-10"><b>Zarząd</b></p>
+    <div formGroupName="zarzad">
+      <input type="number" formControlName="id" hidden>
+
+      <div class="offset-sm-1 col-sm-10">
+        <div class="form-group col-sm-6">
+          <label class="control-label" for="nazwaZarzad">Nazwa</label>
+          <div class="">
+            <input type="text" class="form-control" formControlName="nazwa" id="nazwaZarzad">
+          </div>
+        </div>
+      </div>
+      <p class="offset-sm-1 col-sm-10">Skład</p>
+      <div formArrayName="sklad" *ngFor="let czlonek of zarzadSklad; index as i">
+        <div [formGroupName]="i">
+          <input type="number" formControlName="id" hidden>
+
+          <div class="row offset-sm-1 col-sm-10">
+            <div class="form-group col-lg-3">
+              <label class="control-label" for="imie{i}">Imię</label>
+              <div class="">
+                <input type="text" class="form-control" formControlName="imie" id="imie{i}">
+              </div>
+            </div>
+            <div class="form-group col-lg-3">
+              <label class="control-label" for="nazwisko{i}">Nazwisko</label>
+              <div class="">
+                <input type="text" class="form-control" formControlName="nazwisko" id="nazwisko{i}">
+              </div>
+            </div>
+            <div class="form-group col-lg-3">
+              <label class="control-label" for="Pesel{i}">Pesel</label>
+              <div class="">
+                <input type="text" class="form-control" formControlName="pesel" id="Pesel{i}">
+              </div>
+            </div>
+            <div class="form-group col-lg-2">
+              <label class="control-label" for="funkcjaOrganu{i}">Funkcja</label>
+              <div class="">
+                <input type="text" class="form-control" formControlName="funkcjaOrganu" id="funkcjaOrganu{i}">
+              </div>
+            </div>
+            <div class="col-lg-1 form-group pt-3">
+              <button  class="btn btn-danger mt-3">Usuń</button>
+            </div>
+
+          </div>
+        </div>
+    </div>
+    <div class="form-group offset-sm-1 col-sm-10">
+      <button  class="btn btn-success" (click)="addCzlonekZarzadu()">Dodaj nowego członka</button>
+    </div>
+
+    </div>
+   
+
+<hr>
+<hr>
+    <div class="form-group offset-sm-1 col-sm-10">
+      <div class="offset-sm-8 col-sm-4">
+        <button type="submit" class="btn btn-success w-100"><i class="fa fa-floppy-o" aria-hidden="true"></i>
+          Zapisz</button>
+      </div>
+    </div>
+
+  </form>
+</div>

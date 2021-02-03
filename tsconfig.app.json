@@ -11,5 +11,9 @@
   ],
   "include": [
     "src/**/*.d.ts"
-  ]
+  ],
+  // blokuje ivy żeby używać augury
+  // "angularCompilerOptions": {
+  //   "enableIvy": false
+  // }
 }

@@ -1,0 +1,94 @@
+<div class="container bg-white p-0 col-md-8 col-lg-6 mt-3">
+    <ng-container *ngIf="!loading">
+        <div class="m-auto bg-dark text-white p-3">
+            <h5 class="text-center ">NOWA POZYCJA KOSZTÓW</h5>
+        </div>
+        <div class="p-3">
+            <!-- datalist for podmiot -->
+            <div>
+                <br>
+                <label for="typeahead-prevent-manual-entry">Wybierz podmiot(wpisz nazwę, miejscowość, ulicę lub
+                    nip):</label>
+                <input id="typeahead-prevent-manual-entry" type="text" class="form-control" [(ngModel)]="model"
+                    [ngbTypeahead]="search" [inputFormatter]="formatter" [resultFormatter]="formatter"
+                    [editable]='false'  />
+
+                <button type="submit" class="btn btn-success mt-3" (click)="newPodmiot()">Dodaj nowy podmiot</button>
+            </div>
+
+            <hr>
+            <p *ngIf="model"><b>{{model.nazwa}} {{model.adres.miejscowosc}} ul.{{model.adres.ulica}}
+                    {{model.adres.numer}}
+                    NIP:{{model.nip}}</b></p>
+
+
+            <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
+
+                <div class="row">
+                    <!-- left block -->
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="numerZ">Numer dowodu księgowego</label>
+                            <input type="text" class="form-control" id="numerZ" formControlName="nrDowoduKsiegowego">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="koszt">Kwota</label>
+                            <input type="number" class="form-control" id="koszt" formControlName="kwota">
+                            <div class="text-danger "
+                                *ngIf="f.kwota.errors?.required && (f.kwota.touched || f.kwota.dirty)">
+                                <small>* kwota jest wymagana</small>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- right block -->
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="dataZ">Data zdarzenia</label>
+                            <input type="date" class="form-control" id="dataZ" formControlName="dataZdarzenia">
+                            <div class="text-danger "
+                                *ngIf="f.dataZdarzenia.errors?.required && (f.dataZdarzenia.touched || f.dataZdarzenia.dirty)">
+                                <small>* data zdarzenia jest wymagana</small>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="koszty">Rodzaj kosztów</label>
+                            <select formControlName="koszty" id="koszty" class="form-control">
+                                <option [value]="options[0]" class="text-sm">Koszty uzyskania przychodów</option>
+                                <option [value]="options[1]">Koszty niestanowiące k uzyskania przychodów</option>
+                            </select>
+                            <div class="text-danger "
+                                *ngIf="f.koszty.errors?.required && (f.koszty.touched || f.koszty.dirty)">
+                                <small>* rodzaj kosztów jest wymagany</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- bottom block -->
+                <div class="form-group">
+                    <label for="opisZ">Opis zdarzenia</label>
+                    <input type="text" class="form-control" id="opisZ" formControlName="opisZdarzenia">
+                </div>
+
+
+
+                <input type="number" class="form-control" formControlName="id" hidden>
+
+                <!-- result message -->
+                <p class="text-danger" *ngIf="message.length !== 0">{{message}}</p>
+                <div class="col-md-6 m-auto">
+
+                    <button type="submit" class="btn btn-success" [disabled]="editForm.invalid">
+                        <i class="fa fa-floppy-o  mr-1"></i>Zapisz</button>
+                    <button (click)="onClose()" class="btn btn-primary float-right">
+                        Zamknij</button>
+                </div>
+            </form>
+        </div>
+
+    </ng-container>
+    <ng-template #loadingTemplate>
+        <app-loading></app-loading>
+    </ng-template>
+</div>

@@ -1,0 +1,8 @@
+.nonedisplay{
+
+    display: none;
+}
+.admin-container{
+    background-color: rgb(197, 194, 194, 0.9);
+    padding-top: 10px;
+}

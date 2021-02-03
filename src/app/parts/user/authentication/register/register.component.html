@@ -1,0 +1,115 @@
+<div class="container col-md-6 col-lg-5 col-xl-4  my-5 p-0">
+  <div class="header bg-dark">
+    <h4 class="text-white text-center p-3"><b>Rejestracja nowego użytkownika</b> </h4>
+  </div>
+  <div class="body p-3">
+
+    <div *ngIf="errorMessages.length > 0">
+      <p class="text-danger" >Rejestracja nieudana!!! </p>
+    </div>
+  
+  
+    <form class="form-horizontal m-2" [formGroup]="userForm" (ngSubmit)="onSubmit()">
+      <div class="form-group offset-sm-1 col-sm-10">
+        <i class="fa fa-user mr-1" aria-hidden="true"></i>
+
+        <label class="control-label " for="username">Nazwa użytkownika</label>
+        <div class="">
+          <input type="text " class="form-control" formControlName="username" id="username">
+        </div>
+  <!-- user alert validation -->
+        <div class="text-danger " 
+        *ngIf="f.username.errors?.required && (f.username.touched || f.username.dirty)">
+           <small>* Pole jest wymagane</small> 
+        </div>
+        <div class="text-danger " 
+        *ngIf="f.username.errors?.minlength && (f.username.touched || f.username.dirty)">
+           <small>* Minimalna ilość znakow 6</small> 
+        </div>
+        <div class="text-danger " 
+        *ngIf="f.username.errors?.maxlength && (f.username.touched || f.username.dirty)">
+           <small>* Maksymalna ilość znakow 20</small> 
+        </div>
+        
+      </div>
+  
+      <div class="form-group offset-sm-1 col-sm-10">
+        <span><i class="fa fa-envelope-o fa-fw mr-1"></i></span>
+
+        <label class="control-label" for="email">Email</label>
+        <div class="">
+          <input type="email" class="form-control" formControlName="email" id="email">
+        </div>
+        <!-- email alert validation -->
+        <div class="text-danger " 
+        *ngIf="f.email.errors?.required && (f.email.touched || f.email.dirty)">
+           <small>* Pole jest wymagane</small> 
+        </div>
+        <div class="text-danger " 
+        *ngIf="f.email.errors?.email && (f.email.touched || f.email.dirty)">
+           <small>* Wpisz poprawny email</small> 
+        </div>
+      </div>
+  
+      <div class="form-group offset-sm-1 col-sm-10">
+        <span class=""><i class="fa fa-unlock-alt mr-1" aria-hidden="true"></i></span>
+        <label class="control-label " for="password">Hasło</label>
+        <div class="">        
+          <input type="password" class="form-control" formControlName="password" id="password">
+        </div>
+        <!-- password alert validation -->
+        <div class="text-danger " 
+        *ngIf="f.password.errors?.required && (f.password.touched || f.password.dirty)">
+           <small>* Pole jest wymagane</small> 
+        </div>
+        <div class="text-danger " 
+        *ngIf="f.password.errors?.minlength && (f.password.touched || f.password.dirty)">
+           <small>* Minimalna ilość znakow 6</small> 
+        </div>
+        <div class="text-danger " 
+        *ngIf="f.password.errors?.maxlength && (f.password.touched || f.password.dirty)">
+           <small>* Maksymalna ilość znakow 20</small> 
+        </div>
+      </div>
+
+      <div class="form-group offset-sm-1 col-sm-10">
+        <span class=""><i class="fa fa-unlock-alt mr-1" aria-hidden="true"></i></span>
+        <label class="control-label " for="cpassword">Potwierdź hasło</label>
+        <div class="">        
+          <input type="password" class="form-control" formControlName="confirmPassword" id="cpassword">
+        </div>
+        <!-- password alert validation -->
+        <div class="text-danger " 
+        *ngIf="f.confirmPassword.errors?.required && (f.confirmPassword.touched || f.confirmPassword.dirty)">
+           <small>* Pole jest wymagane</small> 
+        </div>
+        <div class="text-danger " 
+        *ngIf="f.confirmPassword.errors?.minlength && (f.confirmPassword.touched || f.confirmPassword.dirty)">
+           <small>* Minimalna ilość znakow 6</small> 
+        </div>
+        <div class="text-danger " 
+        *ngIf="f.confirmPassword.errors?.maxlength && (f.confirmPassword.touched || f.confirmPassword.dirty)">
+           <small>* Maksymalna ilość znakow 20</small> 
+        </div>
+        <div class="text-danger " 
+        *ngIf="userForm.errors?.checkPasswords && (f.confirmPassword.touched && f.confirmPassword.dirty)">
+           <small>* Potwierdzenie hasła jest błędne</small> 
+        </div>
+      </div>
+  <hr>
+      <div class="form-group offset-sm-1 col-sm-10">
+        <div class="aoffset-sm-6 acol-sm-4">
+          <button type="submit" class="btn btn-success col-12" [disabled]="userForm.invalid || submited">
+            <i class="fa fa-floppy-o  mr-1"></i>Zapisz</button>
+        </div>
+      </div>
+      <!-- errors from server -->
+      <div *ngIf="errorMessages.length > 0">
+        <p class="text-danger" *ngFor="let errorMessage of errorMessages">* {{errorMessage}}</p>
+      </div>
+    </form>
+
+  </div>
+
+
+</div>

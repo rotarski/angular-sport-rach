@@ -1,0 +1,142 @@
+<div class="container admin-container">
+    <h5 class="text-center">
+       <b>Panel Administratora</b> </h5>
+    <hr>
+    <div class="container">
+        <h3 class="text-danger text-center">Panel Zarządzania Treścią Home</h3>
+        <hr>
+        <h4 class="text-center">Sekcje</h4>
+        <!-- Items' list -->
+        <ul class="list-group">
+            <li class="list-group-item" *ngFor="let item of items, index as i">
+                <div class="row" id="{{'item'+i}}" *ngIf="id != i">
+                    <div class="col-sm-3">
+                        {{item.title}}
+                    </div>
+                    <div class="col-sm-3">
+                        {{item.sortId}}
+                    </div>
+                    <div class="col-sm-3">
+                        {{item.content | truncate:15}}
+                    </div>
+                    <div class="col-sm-3">
+                        <button type="button" class="btn  btn-danger mr-5" (click)="deleteItem(item.id)">Usuń</button>
+                        <button type="button" class="btn  btn-info" (click)="edit(i)">Edytuj</button>
+                    </div>
+                </div>
+                <!-- Form for edit item -->
+                <form *ngIf="id == i" action="" class="form-horizontal" id="{{'form'+i}}" #f="ngForm"
+                    (ngSubmit)="saveItem(f)">
+                    <input type="number" class="nonedisplay" name="id" ngModel="{{item.id}}">
+                    <div class="form-group">
+                        <label for="title" class="control-label text-info">Tytuł</label>
+                        <input type="text" class="form-control" id="title" name="title" ngModel="{{item.title}}">
+                    </div>
+                    <div class="form-group">
+                        <label for="content" class="control-label text-info">Treść</label>
+                        <textarea class="form-control" name="content" id="content" rows="10" name="content"
+                            ngModel="{{item.content}}">
+                    </textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="sort" class="control-label text-info">Kolejność</label>
+                        <input type="number" class="form-control" id="sort" name="sortId" ngModel="{{item.sortId}}">
+                    </div>
+                    <button type="submit" class="btn  btn-success mr-5">Zapisz</button>
+                    <button type="button" class="btn  btn-danger" (click)="cancelEdit()">Anuluj</button>
+                </form>
+            </li>
+        </ul>
+        <br>
+        <button type="button" class="btn  btn-success ml-5" id="itemnew" (click)="edit(-2)">Dodaj nową sekcję</button>
+
+        <!-- Form for new item -->
+        <form *ngIf="id === -2" class="form-horizontal" id="formnew" #f="ngForm" (ngSubmit)="saveItem(f)">
+            <input type="number" class="nonedisplay" name="id" ngModel="null">
+            <div class="form-group">
+                <label for="title" class="control-label text-info">Tytuł</label>
+                <input type="text" class="form-control" id="title" name="title" ngModel>
+            </div>
+            <div class="form-group">
+                <label for="content" class="control-label text-info">Treść</label>
+                <textarea class="form-control" name="content" id="content" rows="10" name="content" ngModel>
+            </textarea>
+            </div>
+            <div class="form-group">
+                <label for="sort" class="control-label text-info">Kolejność</label>
+                <input type="number" class="form-control" id="sort" name="sortId" ngModel>
+            </div>
+            <button type="submit" class="btn  btn-success mr-5">Zapisz</button>
+            <button type="button" class="btn  btn-danger" (click)="cancelEdit()">Anuluj</button>
+        </form>
+<!-- Main section -->
+        <h4 class="text-center">Sekcja Główna</h4>
+        <ul class="list-group">
+            <li class="list-group-item" *ngFor="let item of mains, index as i">
+                <div class="row" id="{{'item'+i}}" *ngIf="idMain != i">
+                    <div class="col-sm-3">
+                        {{item.title}}
+                    </div>
+                    <div class="col-sm-3">
+                        {{item.sortId}}
+                    </div>
+                    <div class="col-sm-3">
+                        {{item.content | truncate:15}}
+                    </div>
+                    <div class="col-sm-3">
+                        <button type="button" class="btn  btn-danger mr-5" (click)="deleteMain(item.id)">Usuń</button>
+                        <button type="button" class="btn  btn-info" (click)="editMain(i)">Edytuj</button>
+                    </div>
+                </div>
+                <!-- Form for edit main-->
+                <form *ngIf="idMain == i" action="" class="form-horizontal"  #f="ngForm"
+                    (ngSubmit)="saveMain(f)">
+                    <input type="number" class="nonedisplay" name="id" ngModel="{{item.id}}">
+                    <div class="form-group">
+                        <label for="title" class="control-label text-info">Tytuł</label>
+                        <input type="text" class="form-control" id="title" name="title" ngModel="{{item.title}}">
+                    </div>
+                    <div class="form-group">
+                        <label for="content" class="control-label text-info">Treść</label>
+                        <textarea class="form-control" name="content" id="content" rows="10" name="content"
+                            ngModel="{{item.content}}">
+                    </textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="sort" class="control-label text-info">Kolejność</label>
+                        <input type="number" class="form-control" id="sort" name="sortId" ngModel="{{item.sortId}}">
+                    </div>
+                    <button type="submit" class="btn  btn-success mr-5">Zapisz</button>
+                    <button type="button" class="btn  btn-danger" (click)="cancelEditMain()">Anuluj</button>
+                </form>
+            </li>
+        </ul>
+        <br>
+        <button type="button" class="btn  btn-success ml-5" id="itemnew" (click)="editMain(-2)">Dodaj nową sekcję główną</button>
+        <br>
+        <!-- Form for new main -->
+       
+        <form *ngIf="idMain === -2" class="form-horizontal"  #f="ngForm" (ngSubmit)="saveMain(f)">
+            <input type="number" class="nonedisplay" name="id" ngModel>
+            <div class="form-group">
+                <label for="title" class="control-label text-info">Tytuł</label>
+                <input type="text" class="form-control" id="title" name="title" ngModel>
+            </div>
+            <div class="form-group">
+                <label for="content" class="control-label text-info">Treść</label>
+                <textarea class="form-control" name="content" id="content" rows="10" name="content" ngModel>
+            </textarea>
+            </div>
+            <div class="form-group">
+                <label for="sort" class="control-label text-info">Kolejność</label>
+                <input type="number" class="form-control" id="sort" name="sortId" ngModel>
+            </div>
+            <button type="submit" class="btn  btn-success mr-5">Zapisz</button>
+            <button type="button" class="btn  btn-danger" (click)="cancelEditMain()">Anuluj</button>
+        </form>
+
+    </div>
+    <div class="container">
+        <h3 class="text-danger text-center">Panel Zarządzania Użytkownikami</h3>
+    </div>
+</div>

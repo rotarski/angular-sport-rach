@@ -1,0 +1,71 @@
+<div class="container col-md-7 col-lg-5 bg-white p-0 mt-3">
+    <div class="bg-dark p-3">
+        <h5 class="text-center text-white"><b>DODAJ NOWY PODMIOT</b></h5>
+    </div>
+    <div class="p-3">
+
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+
+            <input type="number" class="form-control" formControlName="id" hidden>
+
+            <div class="form-group">
+                <label for="podmiotNazwa">Nazwa</label>
+                <input type="text" class="form-control" id="podmiotNazwa" formControlName="nazwa">
+                <div class="text-danger " *ngIf="f.nazwa.errors?.required && (f.nazwa.touched || f.nazwa.dirty)">
+                    <small>* kod jest wymagany xxxxx</small>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="podmiotNip">Nip</label>
+                <input type="number" class="form-control" id="podmiotNip" formControlName="nip">
+            </div>
+            <label for="">Adres</label>
+            <hr>
+            <div class="form-group row" formGroupName="adres">
+               
+
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="podmiotMiejscowosc">Miejscowość</label>
+                        <input type="text" class="form-control" id="podmiotMiejscowosc" formControlName="miejscowosc">
+                        <div class="text-danger "
+                            *ngIf="fa.miejscowosc.errors?.required && (fa.miejscowosc.touched || fa.miejscowosc.dirty)">
+                            <small>* kod jest wymagany xxxxx</small>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="podmiotKod">Kod</label>
+                        <input type="text" class="form-control" id="podmiotKod" formControlName="kod">
+
+                        <div class="text-danger " *ngIf="fa.kod.errors?.required && (fa.kod.touched || fa.kod.dirty)">
+                            <small>* kod jest wymagany xxxxx</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="podmiotUlica">Ulica</label>
+                        <input type="text" class="form-control" id="podmiotUlica" formControlName="ulica">
+                    </div>
+                    <div class="form-group">
+                        <label for="podmiotNumer">Numer</label>
+                        <input type="text" class="form-control" id="podmiotNumer" formControlName="numer">
+                    </div>
+                </div>
+            </div>
+
+            <p class="text-danger" *ngIf="message.length !== 0">{{message}}</p>
+            <div class="row">
+                <div class="col-md-6 m-auto">
+
+                    <button type="submit" class="btn btn-success" [disabled]="form.invalid">
+                        <i class="fa fa-floppy-o  mr-1"></i>Zapisz</button>
+                    <button (click)="onClose()" class="btn btn-primary float-right">Zamknij</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

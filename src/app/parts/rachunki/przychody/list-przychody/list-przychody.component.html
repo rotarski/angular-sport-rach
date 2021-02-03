@@ -1,0 +1,67 @@
+<div class="koszty-list col-md-10 m-auto">
+    <ng-container *ngIf="!loading; else loadingTemplate">
+        <div class=" table-scrollable">
+            <table class="table table-sm small">
+                <thead>
+                    <col>
+                    <col>
+                    <col>
+                    <col>
+                    <col>
+                    <col>
+                    <colgroup span="4"></colgroup>
+                    <col>
+                    <tr class="bg-light">
+                        <th scope="col" rowspan="2">Lp</th>
+                        <th scope="col" rowspan="2">Podmiot nazwa</th>
+                        <th scope="col" rowspan="2">Adres</th>
+                        <th scope="col" rowspan="2">Data</th>
+                        <th scope="col" rowspan="2">Nr dowodu <br>księgowego</th>
+                        <th scope="col" rowspan="2">Opis zdarzenia</th>
+                        <th scope="colgroup" colspan="4" class="text-center">
+                            Przychody określone w art. 10a ust. 1 pkt 4 lit. a-d ustawy o działalności</th>
+                        <th scope="col" rowspan="2">Akcja</th>
+                    </tr>
+                    <tr class="bg-light">
+                        <th scope="col">Przychody z dział.<br> nieodpł. poż. pub.</th>
+                        <th scope="col">Przychody z dział.<br>
+                            odpł. pożytku  publ.</th>
+                        <th scope="col">Pozostałe<br> przychody</th>
+                        <th scope="col">Razem <br>przychody</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let przychody of przychodyList| slice:(page-1)*pageSize: page * pageSize, index as i">
+                        <td>{{i + (page-1)*pageSize}}</td>
+                        <td>{{przychody.podmiot.nazwa}}</td>
+                        <td>
+                            {{(przychody.podmiot.adres.kod | kod) + " " +
+                            przychody.podmiot.adres.miejscowosc + "
+                            " + "ul." + przychody.podmiot.adres.ulica +
+                            " " + przychody.podmiot.adres.numer}}
+                        </td>
+                        <td>{{przychody.dataZdarzenia}}</td>
+                        <td>{{przychody.nrDowoduKsiegowego}} </td>
+                        <td>{{przychody.opisZdarzenia}}</td>
+                        <td>{{przychody.kwota}}</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>{{przychody.kwota}}</td>
+                        <td><button class="btn-sm btn-danger" (click)="onDelete(przychody.id)">Usuń</button></td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+
+        <ngb-pagination [(page)]="page" [pageSize]="pageSize" [collectionSize]="przychodyList.length"
+        [maxSize]="maxSize" [boundaryLinks]="true">
+        </ngb-pagination>
+        <button class="btn-sm btn-primary btn-lg float-right" (click)="onAddPrzychody()"><b>Dodaj nową pozycje
+                przychodów</b></button>
+    </ng-container>
+    <ng-template #loadingTemplate>
+        <app-loading></app-loading>
+    </ng-template>
+
+</div>

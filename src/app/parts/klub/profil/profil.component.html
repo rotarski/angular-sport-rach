@@ -1,7 +1,59 @@
-<div class="container">
 
-    <p>profil works!</p>
-    <p>profil works!</p>
-    <p>profil works!</p>
-    <p>profil works!</p>
+<div class="container profile p-3 mt-2">
+    <div>
+        <button class="btn btn-primary m-1">Zmień dane klubu</button>
+        <button class="btn btn-primary m-1">Rachunkowość faktury</button>
+        <button class="btn btn-primary m-1">Dodaj fakturę</button>
+        <button class="btn btn-primary m-1">Dotacje</button>
+        <button class="btn btn-primary m-1" (click)="deleteKlub()">Usuń klub</button>
 </div>
+<hr>
+    <!-- <h3 class="text-center text-infp"><b>PROFIL KLUBU</b></h3> -->
+ 
+
+        <div *ngIf="results;else noneKlub" class="row">
+    
+            <div class="col-sm-6">
+
+                <h3 class="text-primary"><b>{{ results.nazwa}}</b></h3>
+                <p>Adres:{{ results.adres.miejscowosc}} ul.{{ results.adres.ulica}} {{ results.adres.numer}} {{ results.adres.kod | kod}}</p>
+                <p>NIP: {{results.nip}}</p>
+                <p>Regon: {{ results.regon}}</p>
+            </div>
+            <div class="col-sm-6">
+
+                <div *ngIf="results.nadzor">
+                    <h5 >Organ Nadzoru</h5>
+                    <ul>
+                        <li *ngFor="let czlonek of results.nadzor.sklad">
+                            {{ czlonek.imie}} {{ czlonek.nazwisko}}
+                        </li>
+                    </ul>
+                </div>
+                <div *ngIf="results.zarzad">
+                    <h5 >Zarząd</h5>
+                    <ul>
+                        <li *ngFor="let czlonek of results.zarzad.sklad">
+                            {{ czlonek.imie}} {{ czlonek.nazwisko}}
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <h5>Organ Rejestracyjny</h5>
+                    <h5 ><b>{{ results.rejestracja.nazwa}}</b></h5>
+                    <p>Adres:{{ results.rejestracja.adres.miejscowosc}} ul.{{ results.rejestracja.adres.ulica}} {{ results.rejestracja.adres.numer}} {{ results.rejestracja.adres.kod | kod}}</p>
+                    <p>Numer Identyfikacyjny: {{results.rejestracja.numerIdentyfikacyjny}}</p>
+                </div>
+            </div>
+        </div>
+
+ 
+
+</div>
+
+
+<!-- Add new Klub if user has not got -->
+<ng-template #noneKlub>
+    <p>Nie ma dodanego klubu</p>
+    <a type="button" [routerLink]="['/user','klub','edit']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true}">Dodaj Klub</a>
+</ng-template>

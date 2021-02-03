@@ -1,0 +1,5 @@
+<h2>{{item.title}}</h2>
+
+<p class="text-justify"
+        [innerHtml]="edit?(item.content |sanitazeHtml): (item.content | truncate : 100 : true : '...'|sanitazeHtml)">
+</p>

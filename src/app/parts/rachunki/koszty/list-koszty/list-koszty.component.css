@@ -1,0 +1,44 @@
+.koszty-list{
+    /* background-color: rgb(184, 185, 182); */
+
+background-color: white;
+ padding: 0;
+}
+
+table{
+    border-top: 1px solid white;
+}
+.table-scrollable {
+    /* set the height to enable overflow of the table */
+    max-height: 600px;
+    
+    overflow-x: auto;
+    overflow-y: auto;
+    scrollbar-width: thick;
+    scrollbar-track-color: rgb(175, 25, 118);
+}
+
+.table-scrollable thead th {
+    border: none;
+}
+
+.table-scrollable thead  {
+    /* Set header to stick to the top of the container. */
+    position: sticky; 
+    top: 0px;
+    
+    /* This is needed otherwise the sticky header will be transparent 
+    */
+
+
+    /* Because bootstrap adds `border-collapse: collapse` to the
+     * table, the header boarders aren't sticky.
+     * So, we need to make some adjustments to cover up the actual
+     * header borders and created fake borders instead
+     */
+    margin-top: -1px;
+    margin-bottom: -1px;
+
+    /* This is our fake border (see above comment) */
+
+}

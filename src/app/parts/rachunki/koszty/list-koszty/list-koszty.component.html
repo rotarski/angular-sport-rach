@@ -1,0 +1,63 @@
+<div class="koszty-list col-md-10 m-auto">
+    <ng-container *ngIf="!loading; else loadingTemplate">
+        <div class=" table-scrollable">
+            <table class="table table-sm small">
+                <thead>
+                    <col>
+                    <col>
+                    <col>
+                    <col>
+                    <col>
+                    <col>
+                    <colgroup span="3"></colgroup>
+                    <col>
+                    <tr class="bg-light">
+                        <th scope="col" rowspan="2">Lp</th>
+                        <th scope="col" rowspan="2">Podmiot nazwa</th>
+                        <th scope="col" rowspan="2">Adres</th>
+                        <th scope="col" rowspan="2">Data</th>
+                        <th scope="col" rowspan="2">Nr dowodu <br>księgowego</th>
+                        <th scope="col" rowspan="2">Opis zdarzenia</th>
+                        <th scope="colgroup" colspan="3" class="text-center">Koszty</th>
+                        <th scope="col" rowspan="2">Akcja</th>
+                    </tr>
+                    <tr class="bg-light">
+                        <th scope="col">uzyskania przychodów</th>
+                        <th scope="col">niestanowiące kosztów <br>uzyskania przychodów</th>
+                        <th scope="col">Razem</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let koszt of kosztyList| slice:(page-1)*pageSize: page * pageSize, index as i">
+                        <td>{{i + (page-1)*pageSize}}</td>
+                        <td>{{koszt.podmiot.nazwa}}</td>
+                        <td>
+                            {{(koszt.podmiot.adres.kod | kod) + " " +
+                            koszt.podmiot.adres.miejscowosc + "
+                            " + "ul." + koszt.podmiot.adres.ulica +
+                            " " + koszt.podmiot.adres.numer}}
+                        </td>
+                        <td>{{koszt.dataZdarzenia}}</td>
+                        <td>{{koszt.nrDowoduKsiegowego}} </td>
+                        <td>{{koszt.opisZdarzenia}}</td>
+                        <td>{{koszt.kwota}}</td>
+                        <td>0</td>
+                        <td>{{koszt.kwota}}</td>
+                        <td><button class="btn-sm btn-danger" (click)="onDelete(koszt.id)">Usuń</button></td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+
+        <ngb-pagination [(page)]="page" [pageSize]="pageSize" [collectionSize]="kosztyList.length"
+            [maxSize]="maxSize" [boundaryLinks]="true">
+        </ngb-pagination>
+        <button class="btn-sm btn-primary btn-lg float-right" (click)="onAddKoszt()"><b>Dodaj nową pozycje
+                kosztow</b></button>
+    </ng-container>
+    <ng-template #loadingTemplate>
+        <app-loading></app-loading>
+    </ng-template>
+
+</div>

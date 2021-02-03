@@ -1,0 +1,42 @@
+<!-- Main jumbotron for a primary marketing message or call to action -->
+
+<div class="jumbotron">
+
+  <div class="container" *ngIf="mains else loading">
+
+    <div *ngFor="let item of mains, index as i">
+      <app-main-container [item]="item" [edit]="i === editMain"></app-main-container>
+      <p *ngIf="editMain != i"><a class="btn btn-primary" role="button" (click)="onEditMain(i)">Dowiedz się więcej
+          &raquo;</a></p>
+      <p *ngIf="editMain == i"><a class="btn btn-primary btn-sm" role="button" (click)="onEditMain(-1)">Zamknij</a></p>
+    </div>
+  </div>
+</div>
+
+<div class="container items col-md-10 m-auto">
+  
+  <!-- Example row of columns -->
+
+  <div [ngClass]="{'row': editItem === -1}" *ngIf="items else loading">
+    <div [ngClass]="{'col-md-6': editItem === -1}" *ngFor="let item of items, index as i">
+      <div class="item">
+
+        <app-item-container [item]="item" [edit]="i === editItem"></app-item-container>
+        <p class="offset-sm-3 col-sm-6" *ngIf="editItem != i"><a class="btn btn-success btn-sm mx-auto" role="button"
+            (click)="onEdit(i)">Dowiedz się więcej &raquo;</a></p>
+        <p class="offset-sm-3 col-sm-6" *ngIf="editItem == i"><a class="btn btn-success btn-sm mx-auto" role="button"
+            (click)="onEdit(-1)">Zamknij</a></p>
+      </div>
+    </div>
+
+  </div>
+
+  <ng-template #loading>
+    <div class="d-flex justify-content-center">
+      <div class="spinner-border" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+    </div>
+  </ng-template>
+
+</div> <!-- /container -->

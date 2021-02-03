@@ -1,0 +1,11 @@
+/* ngb-typeahead-window.dropdown-menu {
+    max-height: 500px !important;
+    overflow-y: auto;
+} */
+
+ngb-typeahead-window.dropdown-menu {
+    max-height: 200px !important;
+    width: auto !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+  }

@@ -1,0 +1,23 @@
+input.ng-invalid.ng-touched{
+    border: 1px solid red;
+}
+
+form{
+    /* border: 1px solid black; */
+    border-radius: 5px 5px ;
+    padding: 5px;
+}
+.container{
+    /* background-color: rgb(184, 185, 182, 0.95); */
+    background-color: white;
+    border-radius: 20px 20px;
+    max-width: 450px;
+}
+
+.header{
+    border-top-left-radius: 20px 20px ;
+    border-top-right-radius: 20px 20px ;
+}
+.ng-dirty{
+    background-color: white;
+}
